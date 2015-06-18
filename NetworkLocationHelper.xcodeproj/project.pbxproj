@@ -11,6 +11,8 @@
 		7E1EC9671B333FAB00C7BD22 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E1EC9661B333FAB00C7BD22 /* Images.xcassets */; };
 		7E1EC96A1B333FAB00C7BD22 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E1EC9681B333FAB00C7BD22 /* MainMenu.xib */; };
 		7E1EC9761B333FAB00C7BD22 /* NetworkLocationHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1EC9751B333FAB00C7BD22 /* NetworkLocationHelperTests.swift */; };
+		7E1EC9811B333FCE00C7BD22 /* switcher.2.sc in Resources */ = {isa = PBXBuildFile; fileRef = 7E1EC97F1B333FCE00C7BD22 /* switcher.2.sc */; };
+		7E1EC9821B333FCE00C7BD22 /* scselect.sc in Resources */ = {isa = PBXBuildFile; fileRef = 7E1EC9801B333FCE00C7BD22 /* scselect.sc */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +34,8 @@
 		7E1EC96F1B333FAB00C7BD22 /* NetworkLocationHelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NetworkLocationHelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1EC9741B333FAB00C7BD22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E1EC9751B333FAB00C7BD22 /* NetworkLocationHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkLocationHelperTests.swift; sourceTree = "<group>"; };
+		7E1EC97F1B333FCE00C7BD22 /* switcher.2.sc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = switcher.2.sc; sourceTree = "<group>"; };
+		7E1EC9801B333FCE00C7BD22 /* scselect.sc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scselect.sc; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +88,8 @@
 		7E1EC9621B333FAB00C7BD22 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				7E1EC97F1B333FCE00C7BD22 /* switcher.2.sc */,
+				7E1EC9801B333FCE00C7BD22 /* scselect.sc */,
 				7E1EC9631B333FAB00C7BD22 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -186,6 +192,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E1EC9811B333FCE00C7BD22 /* switcher.2.sc in Resources */,
+				7E1EC9821B333FCE00C7BD22 /* scselect.sc in Resources */,
 				7E1EC9671B333FAB00C7BD22 /* Images.xcassets in Resources */,
 				7E1EC96A1B333FAB00C7BD22 /* MainMenu.xib in Resources */,
 			);

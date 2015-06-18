@@ -36,31 +36,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     let statusItem = NSStatusBar.systemStatusBar().statusItemWithLength(-1)
 
-    func changedItem(sender:NSMenuItem) {
-        println(sender.keyEquivalent)
-        
-
-        let action = "do shell script \"scselect " + sender.keyEquivalent + "\""
-        println(action)
-        
-        var error: NSDictionary?
-        if let scriptObject = NSAppleScript(source: action) {
-            if let output: NSAppleEventDescriptor = scriptObject.executeAndReturnError(
-                &error) {
-                    
-                    let stringArray = output.stringValue
-                    println(stringArray)
-                    
-                    determineActiveNetworkConfigs()
-                    
-            } else if (error != nil) {
-                println("error: \(error)")
-            }
-        }
-
-        
-    }
-
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         
         //icon
@@ -97,7 +72,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         var id = currentString.split("(")[0].stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) //id number and selected star
                         
                         var menuItem = NSMenuItem(title: finalString, action: nil, keyEquivalent: id)
-                        menuItem.tag = i
                         
                         if id.rangeOfString("*") != nil{
                             //currently selected - set enabled to no
@@ -112,18 +86,82 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                         
                     }
                     
-                    //stringArray.removeAtIndex(0)
+                    //add separator, about and quit button
+                    var separator = NSMenuItem.separatorItem()
+                    var aboutButton = NSMenuItem(title: "About", action: "about", keyEquivalent: "about")
+                    var quitButton = NSMenuItem(title: "Quit", action: "quit", keyEquivalent: "quit")
+                    
+                    statusMenu.addItem(separator)
+                    statusMenu.addItem(aboutButton)
+                    statusMenu.addItem(quitButton)
                     
                     println(stringArray)
+                    
+                    
             } else if (error != nil) {
-                println("error: \(error)")
+                println("error running script: \(error)")
+                
+                //show alert
+                let alert:NSAlert = NSAlert()
+                alert.messageText = "There seems to be an error...";
+                alert.informativeText = "Getting current locations: \(error)"
+                alert.runModal()
             }
         }
 
     }
+    
+    func changedItem(sender:NSMenuItem) {
+        println(sender.keyEquivalent)
+        
+        
+        let action = "do shell script \"scselect " + sender.keyEquivalent + "\""
+        println(action)
+        
+        var error: NSDictionary?
+        if let scriptObject = NSAppleScript(source: action) {
+            if let output: NSAppleEventDescriptor = scriptObject.executeAndReturnError(
+                &error) {
+                    
+                    let stringArray = output.stringValue
+                    println(stringArray)
+                    
+                    determineActiveNetworkConfigs()
+                    
+            } else if (error != nil) {
+                println("error running script: \(error)")
+                
+                //show alert
+                let alert:NSAlert = NSAlert()
+                alert.messageText = "There seems to be an error...";
+                alert.informativeText = "Changing network location error: \(error)"
+                alert.runModal()
+                
+            }
+        }
+        
+        
+    }
+    
+    func about() {
+        //show alert
+        let alert:NSAlert = NSAlert()
+        alert.messageText = "NetworkLocation";
+        alert.informativeText = "Copyright © 2015 Cameron Carmichael Alonso. All rights reserved.\n\nIcons by the awesome guys at www.icons8.com."
+        alert.runModal()
+        
+    }
+    
+    func quit() {
+        
+        NSApplication.sharedApplication().terminate(self)
+        
+    }
 
     func applicationWillTerminate(aNotification: NSNotification) {
-        // Insert code here to tear down your application
+        
+        println("Time to quit, thanks for using me!")
+        
     }
 
 

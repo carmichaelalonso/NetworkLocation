@@ -51,12 +51,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func determineActiveNetworkConfigs() {
         
         //run applescript to determine active networks
-        let bundle = NSBundle.mainBundle()
-        let path = bundle.pathForResource("scselect", ofType: "sc")
-        let content = String(contentsOfFile: path!, encoding: NSUTF8StringEncoding, error: nil)
+        let content = "do shell script \"scselect\"\nset a to the result\nreturn a"
         
         var error: NSDictionary?
-        if let scriptObject = NSAppleScript(source: content!) {
+        if let scriptObject = NSAppleScript(source: content) {
             if let output: NSAppleEventDescriptor = scriptObject.executeAndReturnError(
                 &error) {
                     
@@ -88,10 +86,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                     
                     //add separator, about and quit button
                     var separator = NSMenuItem.separatorItem()
+                    var newLocationButton = NSMenuItem(title: "Create New Location", action: "newLocation", keyEquivalent: "newLocation")
                     var aboutButton = NSMenuItem(title: "About", action: "about", keyEquivalent: "about")
                     var quitButton = NSMenuItem(title: "Quit", action: "quit", keyEquivalent: "quit")
                     
                     statusMenu.addItem(separator)
+                    statusMenu.addItem(newLocationButton)
                     statusMenu.addItem(aboutButton)
                     statusMenu.addItem(quitButton)
                     
@@ -143,14 +143,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     }
     
+    func newLocation() {
+        NSWorkspace.sharedWorkspace().openURL(NSURL(string: "x-apple.systempreferences:com.apple.preference.network")!)
+    }
+    
     func about() {
         //show alert
         let alert:NSAlert = NSAlert()
         alert.messageText = "NetworkLocation";
-        alert.informativeText = "Copyright © 2015 Cameron Carmichael Alonso. All rights reserved.\n\nIcons by the awesome guys at www.icons8.com."
+        alert.informativeText = "Copyright © 2015 Cameron Carmichael Alonso. All rights reserved.\n\nIcons by the awesome guys at www.icons8.com"
         alert.runModal()
         
     }
+    
     
     func quit() {
         
